@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+
+    
+<style>
+  
+
+  input[type=text] {
+  width: 15%;
+  box-sizing: border-box;
+  border: 2px solid green;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image:url("searchicon.png");
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+}
+  
+
+button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+body{
+  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+  background: linear-gradient(to right, #25c481, #25b7c4);
+  font-family: 'Roboto', sans-serif;
+}
+section{
+  margin: 50px;
+}
+h1{
+  font-size: 30px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 15px;
+}
+h2{
+  font-size: 20px;
+  color: #556B2F;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 15px;
+}
+table{
+  width:100%;
+  table-layout: fixed;
+}
+.tbl-header{
+  background-color: rgba(255,255,255,0.3);
+ }
+.tbl-content{
+  height:300px;
+  overflow-x:auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+th{
+  padding: 100px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 40px;
+  color: #fff;
+  text-transform: uppercase;
+}
+td{
+  padding: 15px;
+  text-align: left;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 25px;
+  color: #fff;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+}
+</style>
+
+
+
+</head>
+<body>
+ <h1>Özelliklerini görmek istediğiniz ülkenin adını ingilizce yazılışıyla giriniz</h1>
+
+    <table>
+<tr>
+<th>Ülke Adı</th>
+<th>Nüfus</th>
+<th>Alpha 3 Kodu</th>
+<th>Bölge</th>
+<th>Zaman Dilimi</th>
+
+</tr>
+<tr>
+   <td id="one"></td>
+   <td id=two></td>
+   <td id=three></td>
+   <td id=four></td>
+   <td id=five></td>
+</tr>
+
+ <input type="text" placeholder="Turkey.."id="txtAd">
+ <button id="uyari">Ülke Özelliklerini Sırala</button>
+ <script>
+    
+ </script>
+    </table>
+    
+    <script>
+      $(document).ready(function(){
+      
+         
+$.getJSON("https://restcountries.eu/rest/v2/all",function(veri) {
+    var btn=document.getElementById("uyari");
+     btn.onclick=function(){
+         
+         var ad=document.getElementById("txtAd");
+         console.log(ad.value)
+ 
+for(let i=0;i<249;i++){
+  if(ad.value==veri[i].name){
+        
+var ulke=veri[i].name
+var tld=veri[i].population
+ var kod=veri[i].alpha3Code
+ var bölge=veri[i].region
+ var zaman=veri[i].timezones[0]
+    $( "#one" ).append(ulke);
+    $( "#two" ).append(tld);
+    $( "#three" ).append(kod);
+    $( "#four" ).append(bölge);
+    $( "#five" ).append(zaman);
+}
+
+}
+
+
+}
+
+
+         })
+       })
+    </script>
+    <h2>Başka bir ülkeyi görmek isterseniz sayfayı yenileyiniz</h2>
+</body>
+</html>
